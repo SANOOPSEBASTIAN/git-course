@@ -8,18 +8,21 @@ conn=psycopg2.connect(
 )
 cursor = conn.cursor()
 cursor.execute("DROP TABLE IF EXISTS dbjoin")
-cursor.execute ("CREATE TABLE dbjoin (Index VARCHAR(255), country VARCHAR(255), phone VARCHAR(255))" )
+cursor.execute ("CREATE TABLE dbjoin (Index VARCHAR(255), country VARCHAR(255), phone VARCHAR(255), city VARCHAR(255))" )
 
 cursor.execute("""
-    SELECT customers."Index", customers.country, people."Phone" 
-    FROM customers 
-    INNER JOIN people ON customers."Index" = people."Index" 
-    WHERE people."Index" < '6'
+    SELECT customers.Index, customers.country, people.Phone, customers.city
+    FROM Customers 
+    INNER JOIN people ON customers.Index = people.Index
+    WHERE people.Index < '6'
 """)
 
 result=cursor.fetchall()
+print (result)
 
 for row in result:
-    cursor.execute("INSERT INTO dbjoin (Index, country, phone) VALUES (%s, %s, %s)", row)
+    cursor.execute("INSERT INTO dbjoin (Index, country, phone, city) VALUES (%s, %s, %s, %s)", row)
 
 conn.commit()
+cursor.close()
+conn.close()
