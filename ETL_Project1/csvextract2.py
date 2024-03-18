@@ -10,22 +10,22 @@ db=pd.read_csv(r"D:\SanoopDE\people-1000.CSV")
 
 create_table_details = """
 CREATE TABLE people (
-    "Index" SERIAL,
-"User Id" VARCHAR(255),
-"First Name" VARCHAR(255),
-"Last Name" VARCHAR(255),
-"Sex" VARCHAR(255),
-"Email" VARCHAR(255),
-"Phone" VARCHAR(255),
-"Date of birth" VARCHAR(255),
-"Job Title" VARCHAR(255)
+Index SERIAL,
+User_Id VARCHAR(255),
+First_Name VARCHAR(255),
+Last_Name VARCHAR(255),
+Sex VARCHAR(255),
+Email VARCHAR(255),
+Phone VARCHAR(255),
+Date_of_birth VARCHAR(255),
+Job_Title VARCHAR(255)
 )
 """
 cursor=conn.cursor()
 cursor.execute("DROP TABLE IF EXISTS people")
 
 insert_values = """
-INSERT INTO people ("Index", "User Id", "First Name", "Last Name", "Sex", "Email", "Phone", "Date of birth", "Job Title")
+INSERT INTO people (Index, User_Id, First_Name, Last_Name, Sex, Email, Phone, Date_of_birth, Job_Title)
 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
 """
 #data = (row["Index"],row["User Id"],row[ "First Name"],row["Last Name"],row[Sex],row[Email],row[Phone],row["Date of birth"],row["Job Title"])
